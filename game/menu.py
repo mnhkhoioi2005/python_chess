@@ -63,7 +63,7 @@ class MainMenu:
         pygame.draw.rect(self.screen, (128, 0, 128), self.online_button_rect)
         pygame.draw.rect(self.screen, self.BLACK, self.online_button_rect, 3)
         
-        online_text = self.button_font.render("ONLINE", True, self.WHITE)
+        online_text = self.button_font.render("LAN MULTIPLAYER", True, self.WHITE)
         online_rect = online_text.get_rect(center=self.online_button_rect.center)
         self.screen.blit(online_text, online_rect)
         
@@ -83,7 +83,7 @@ class MainMenu:
         elif self.vs_ai_button_rect.collidepoint(pos):
             return "vs_ai"
         elif self.online_button_rect.collidepoint(pos):
-            return "online"
+            return "lan_multiplayer"  # Changed to LAN multiplayer
         elif self.exit_button_rect.collidepoint(pos):
             return "exit"
         return None
@@ -101,6 +101,8 @@ class MainMenu:
                         return "vs_player"
                     elif result == "vs_ai":
                         return "vs_ai"
+                    elif result == "lan_multiplayer":
+                        return "lan_multiplayer"
                     elif result == "exit":
                         pygame.quit()
                         sys.exit()

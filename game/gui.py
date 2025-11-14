@@ -3,7 +3,7 @@ import sys
 import os
 
 class ChessGUI:
-    def __init__(self):
+    def __init__(self, server_ip=None):
         pygame.init()
         
         # Maximize window setup
@@ -23,6 +23,9 @@ class ChessGUI:
         self.board_y = (self.screen_height - self.BOARD_SIZE) // 2
         
         pygame.display.set_caption("Cờ Vua")
+        
+        # Server IP for display
+        self.server_ip = server_ip
         
         # Màu sắc
         self.WHITE = (240, 217, 181)
@@ -306,12 +309,38 @@ class ChessGUI:
                 return piece
         return None
 
+    def draw_ip_info(self):
+        """Vẽ thông tin IP ở góc trên trái"""
+        if self.server_ip:
+            font = pygame.font.Font(None, 36)
+            
+            # Background box
+            ip_text = f"Server IP: {self.server_ip}"
+            text_surface = font.render(ip_text, True, (255, 255, 255))
+            text_rect = text_surface.get_rect()
+            
+            # Box với padding
+            box_rect = pygame.Rect(10, 10, text_rect.width + 20, text_rect.height + 10)
+            pygame.draw.rect(self.screen, (0, 0, 0, 180), box_rect)
+            pygame.draw.rect(self.screen, (255, 0, 0), box_rect, 2)
+            
+            # Text
+            self.screen.blit(text_surface, (20, 15))
+            
+            # Share instruction
+            share_font = pygame.font.Font(None, 24)
+            share_text = share_font.render("Share this IP with your friend", True, (200, 200, 200))
+            self.screen.blit(share_text, (20, 45))
+
     def draw(self, board, ai_mode=False, move_history=None):
         """Vẽ toàn bộ game với hiệu ứng đẹp"""
         self.draw_board(board)
         self.draw_pieces(board)
         self.draw_dragging_piece()
         self.draw_buttons(ai_mode)
+        
+        # Vẽ thông tin IP
+        self.draw_ip_info()
         
         # Vẽ lịch sử nước đi
         if move_history:

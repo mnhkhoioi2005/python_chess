@@ -9,7 +9,7 @@ import time
 class OnlineChessGame:
     def __init__(self, server_ip='localhost'):
         self.board = Board()
-        self.gui = ChessGUI()
+        self.gui = ChessGUI(server_ip)  # Truyền IP vào GUI
         self.clock = pygame.time.Clock()
         self.running = True
         self.waiting_for_promotion = False

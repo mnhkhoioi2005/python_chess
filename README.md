@@ -70,3 +70,12 @@ python download_pieces.py
 - Thả vào ô muốn đi
 - Luân phiên trắng-đen
 - ESC hoặc đóng cửa sổ để thoát
+
+
+T1
+python host_and_play.py
+T2
+python quick_connect.py
+
+Chạy file main.py
+
